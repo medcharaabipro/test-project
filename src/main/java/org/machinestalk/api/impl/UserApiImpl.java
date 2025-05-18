@@ -3,6 +3,7 @@ package org.machinestalk.api.impl;
 import org.machinestalk.api.UserApi;
 import org.machinestalk.api.dto.UserDto;
 import org.machinestalk.api.dto.UserRegistrationDto;
+import org.machinestalk.mapper.UserMapper;
 import org.machinestalk.service.UserService;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
@@ -17,14 +18,14 @@ public class UserApiImpl implements UserApi {
     }
 
     @Override
-    public UserDto register(final UserRegistrationDto userRegistrationDto) {
-        // implement me !!
-        return null;
+    public Mono<UserDto> register(final UserRegistrationDto userRegistrationDto) {
+        return userService
+                .registerUser(userRegistrationDto)
+                .map(UserMapper::fromUserToUserDto);
     }
 
     @Override
-    public Mono<UserDto> findUserById(long id) {
-        // implement me !!
-        return null;
+    public Mono<UserDto> findUserById(Long userId) {
+        return userService.getById(userId).map(UserMapper::fromUserToUserDto);
     }
 }

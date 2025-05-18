@@ -36,6 +36,38 @@ public class UserDto {
 
     private String firstName;
 
+    public String getFirstName() {
+      return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+      this.firstName = firstName;
+    }
+
+    public String getLastName() {
+      return lastName;
+    }
+
+    public void setLastName(String lastName) {
+      this.lastName = lastName;
+    }
+
+    public String getDepartment() {
+      return department;
+    }
+
+    public void setDepartment(String department) {
+      this.department = department;
+    }
+
+    public List<String> getAdresses() {
+      return adresses;
+    }
+
+    public void setAdresses(List<String> adresses) {
+      this.adresses = adresses;
+    }
+
     private String lastName;
 
     private String department;

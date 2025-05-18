@@ -1,20 +1,16 @@
 package org.machinestalk.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.Set;
 
-@Entity
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
+
+@Table("departments")
 public class Department {
 
-  @Id @GeneratedValue private Long id;
+  @Id
+  private Long id;
 
   private String name;
-
-  @OneToMany
-  private Set<User> users;
 
   public Department() {
   }
@@ -39,20 +35,11 @@ public class Department {
     this.name = name;
   }
 
-  public Set<User> getUsers() {
-    return users;
-  }
-
-  public void setUsers(final Set<User> users) {
-    this.users = users;
-  }
-
   @Override
   public String toString() {
     return "Department{" +
             "id=" + id +
             ", name='" + name + '\'' +
-//            ", users=" + users +
             '}';
   }
 }
