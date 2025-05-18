@@ -14,7 +14,7 @@ public interface UserService {
    * @param userRegistrationDto dto for user registration.
    * @return user entity.
    */
-  User registerUser(@NotNull @Valid UserRegistrationDto userRegistrationDto);
+  Mono<User> registerUser(@NotNull @Valid UserRegistrationDto userRegistrationDto);
 
   /**
    * Get user by its id.
