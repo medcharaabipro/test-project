@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@RequestMapping(produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+@RequestMapping(produces = APPLICATION_JSON_VALUE)
 public interface UserApi {
 
   /**
@@ -21,7 +21,7 @@ public interface UserApi {
    * @param userRegistrationDto DTO that input data needed to register a new user.
    * @return registered user infos.
    */
-  @PostMapping("/users/register")
+  @PostMapping(value="/users/register", consumes = APPLICATION_JSON_VALUE)
   UserDto register(@NotNull @Valid UserRegistrationDto userRegistrationDto);
 
   /**
@@ -30,6 +30,6 @@ public interface UserApi {
    * @param id user id
    * @return user infos
    */
-  @GetMapping("/users/${userId}")
+  @GetMapping("/users/{userId}")
   Mono<UserDto> findUserById(long id);
 }

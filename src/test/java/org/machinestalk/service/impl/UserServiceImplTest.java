@@ -12,6 +12,7 @@ import org.machinestalk.service.UserService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.modelmapper.ModelMapper;
 import reactor.test.StepVerifier;
 
 import java.util.Optional;
@@ -25,12 +26,14 @@ import static org.mockito.MockitoAnnotations.openMocks;
 class UserServiceImplTest {
 
   @Mock private UserRepository userRepository;
+  @Mock private ModelMapper mapper;
 
-  @InjectMocks private UserService userService;
+  private UserService userService;
 
   @BeforeEach
   void setUp() {
     openMocks(this);
+    userService = new UserServiceImpl(userRepository, mapper);
   }
 
   @Test
@@ -62,7 +65,9 @@ class UserServiceImplTest {
     user.setLastName(userRegistrationDto.getLastName());
     user.setDepartment(department);
     user.setAddresses(singleton(address));
+    user.setId(1L);
 
+    when(mapper.map(any(UserRegistrationDto.class), eq(User.class))).thenReturn(user);
     when(userRepository.save(Mockito.any(User.class))).thenReturn(user);
 
     // When
